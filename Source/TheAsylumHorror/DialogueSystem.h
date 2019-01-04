@@ -36,5 +36,6 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	int current = 0;
 	TArray<FString> text;
+	TMap<FString, TArray<FString>> map;
 		
 };

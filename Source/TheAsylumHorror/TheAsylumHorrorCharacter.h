@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "TheAsylumHorrorCharacter.generated.h"
-
+#define out
 class UInputComponent;
 
 UCLASS(config=Game)

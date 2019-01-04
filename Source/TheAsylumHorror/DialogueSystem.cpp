@@ -12,7 +12,8 @@ UDialogueSystem::UDialogueSystem()
 	// ...
 }
 void UDialogueSystem::Search(FString Type) {
-
+	text = map[Type];
+	current = 0;
 }
 
 void UDialogueSystem::Update() {
@@ -34,6 +35,11 @@ void UDialogueSystem::BeginPlay()
 	FString g[] = { TEXT("1"), TEXT("2"), TEXT("3") };
 	text.Empty();
 	text.Append(g, ARRAY_COUNT(g));
+	map.Add("test1", text);
+	text[0] = TEXT("test2_0");
+	text[1] = TEXT("test2_1");
+	text.Add("333");
+	map.Add("test2", text);
 }
 
 
