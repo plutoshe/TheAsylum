@@ -215,7 +215,11 @@ void ATheAsylumHorrorCharacter::EndTouch(const ETouchIndex::Type FingerIndex, co
 	}
 	TouchItem.bIsPressed = false;
 }
-
+void ATheAsylumHorrorCharacter::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) {
+	if (EnableAct) {
+		InputComponent->AxisBindings.RemoveAt(0);
+	}
+}
 //Commenting this section out to be consistent with FPS BP template.
 //This allows the user to turn without using the right virtual joystick
 
