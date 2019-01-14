@@ -39,7 +39,7 @@ void UInteractorSystem::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		OUT InteractableHit,
 		PlayerViewPointLocation,
 		LineTraceEnd,
-		FCollisionObjectQueryParams(ECollisionChannel::ECC_WorldStatic),
+		FCollisionObjectQueryParams(ECollisionChannel::ECC_GameTraceChannel2),
 		TraceParameters
 	);
 
