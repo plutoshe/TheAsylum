@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "DialogueSystem.h"
+#include "Misc/FileHelper.h"
 
 // Sets default values for this component's properties
 UDialogueSystem::UDialogueSystem()
@@ -12,8 +13,14 @@ UDialogueSystem::UDialogueSystem()
 	// ...
 }
 void UDialogueSystem::Search(FString Type) {
-	text = map[Type];
-	current = 0;
+	if (map.Contains(Type)) {
+		text = map[Type];
+		current = 0;
+	}
+	else {
+		text.Empty();
+		current = 0;
+	}
 }
 
 void UDialogueSystem::Update() {
@@ -30,16 +37,27 @@ void UDialogueSystem::Update() {
 void UDialogueSystem::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// ...
-	FString g[] = { TEXT("1"), TEXT("2"), TEXT("3") };
+	FString saveText;
+	FFileHelper::LoadFileToString(saveText, *(FPaths::GameDir() + "test.txt"));
+	TArray<FString> Out;
 	text.Empty();
-	text.Append(g, ARRAY_COUNT(g));
-	map.Add("test1", text);
-	text[0] = TEXT("test2_0");
-	text[1] = TEXT("test2_1");
-	text.Add("333");
-	map.Add("test2", text);
+	TArray<FString> trans;
+	saveText.ParseIntoArray(Out, TEXT("- "), true);
+	for (int i = 0; i < Out.Num(); i++) {
+		Out[i] = Out[i].Replace(ANSI_TO_TCHAR("\n"), ANSI_TO_TCHAR(""));
+		Out[i] = Out[i].Replace(ANSI_TO_TCHAR("\r"), ANSI_TO_TCHAR(""));
+		Out[i].ParseIntoArray(trans, TEXT("# "), true);
+		for (int j = 0; j < trans.Num(); j++) {
+			UE_LOG(LogTemp, Log, TEXT("%d: %s"), j, *trans[j]);
+		}
+		if (trans.Num() > 0) {
+			FString key = trans[0];
+			trans.RemoveAt(0);
+			UE_LOG(LogTemp, Log, TEXT("#%s#"), *key);
+			map.Add(key, trans);
+		}
+	}
+
 }
 
 
