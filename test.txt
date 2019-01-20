@@ -17,7 +17,7 @@
 # text:c8
 # text:c19
 - test3
-# widget:dialogue,text:c1
+# widget:option,text:c1
 # text:c3
 # text:c2
 # text:c4
