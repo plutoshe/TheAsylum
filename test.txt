@@ -17,7 +17,7 @@
 # text:c8
 # text:c19
 - test3
-# widget:option,text:c1
+# widget:option,option:option1***gg1,option:option2***gg2,option:option3***gg3
 # text:c3
 # text:c2
 # text:c4
@@ -26,3 +26,13 @@
 # text:c76
 # text:c8
 # text:c19
+- gg1
+# widget:dialogue,text:selection1
+# text:selection1_1
+- gg2
+# widget:dialogue,text:selection2
+# text:selection2_1
+- gg3
+# widget:dialogue,text:selection3
+# text:selection3_1
+
