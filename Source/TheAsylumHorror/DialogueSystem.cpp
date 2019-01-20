@@ -28,9 +28,27 @@ void UDialogueSystem::Update() {
 		Cancle.Broadcast();
 	}
 	else {
-		TextChange.Broadcast(text[current]);
+		FString WidgetName = "";
+		TArray<FString> trans;
+		TArray<FString> keys, values;
+		text[current].ParseIntoArray(trans, TEXT(","), true);
+		keys.Empty();
+		values.Empty();
+		for (int i = 0; i < trans.Num(); i++) {
+			TArray<FString> kvpair;
+			trans[i].ParseIntoArray(kvpair, TEXT(":"), true);
+			if (kvpair.Num() >= 2) {
+				if (kvpair[0].ToUpper() == "WIDGET") {
+					WidgetName = kvpair[1];
+				}
+				keys.Add(kvpair[0]);
+				values.Add(kvpair[1]);
+			}
+		}
+		UpdateWidget.Broadcast(WidgetName, FMyInterpStruct{ keys, values });
 	}
-		current++;
+	current++;
+	
 }
 
 // Called when the game starts
